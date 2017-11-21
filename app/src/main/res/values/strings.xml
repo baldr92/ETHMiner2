@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ETH Miner</string>
+    <string name="start">START</string>
+    <string name="balance">ПРОВЕРИТЬ БАЛАНС</string>
+    <string name="imageButton">Включить майнер</string>
+    <string name="your_balance">ВАШ БАЛАНС</string>
+    <string-array name="titles">
+        <item>Аккаунт</item>
+        <item>Получить промокод</item>
+    </string-array>
+</resources>
