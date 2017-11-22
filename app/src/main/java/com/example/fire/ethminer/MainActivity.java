@@ -10,20 +10,37 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import java.util.Date;
+import com.example.fire.ethminer.models.Request;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.util.List;
+import java.util.Date;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static String BASE_URL = "https://min-api.cryptocompare.com";
     ImageButton imageButton;
     boolean flag = true;
     GraphView graphView;
     private String titles[];
     private ListView drawerList;
+    private RetrofitInterfaceGraph service;
+    @BindView(R.id.new_data)
+    TextView textData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +80,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        titles = getResources().getStringArray(R.array.titles);
-        drawerList = (ListView) findViewById(R.id.drawer);
-        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, titles));
-        drawerList.setOnItemClickListener(new DrawerItemClickLisener());
+
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        service = retrofit.create(RetrofitInterfaceGraph.class);
+        Call<Request> call = service.getPosts("ETH", "USD", 30);
+        call.enqueue(new Callback<Request>() {
+            @Override
+            public void onResponse(Call<Request> call, Response<Request> response) {
+                Request request = response.body();
+                Date date = new Date();
+                date.setTime((long) request.getData().get(1).getTime()*1000);
+                String s = "  ";
+                textData.setText(date + s);
+            }
+
+            @Override
+            public void onFailure(Call<Request> call, Throwable t) {
+
+            }
+        });
 
     }
 
-    public class DrawerItemClickLisener implements ListView.OnItemClickListener {
-
+    public class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectItem(position);
