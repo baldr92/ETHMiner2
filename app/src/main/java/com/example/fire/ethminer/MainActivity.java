@@ -38,9 +38,11 @@ public class MainActivity extends AppCompatActivity {
     private String titles[];
     private ListView drawerList;
     private RetrofitInterfaceGraph service;
+
     @BindView(R.id.new_data)
     TextView textData;
-
+    @BindView(R.id.balance)
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +65,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        graphView = findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-             new DataPoint(0, 1),
-             new DataPoint(1,3),
-             new DataPoint(2, 3)
-        });
-        graphView.addSeries(series);
 
-        TextView textView = (TextView) findViewById(R.id.balance);
+
+
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,8 +76,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        callRetrofit2();
 
 
+
+    }
+
+    public class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
+        }
+    }
+
+    private void selectItem(int position) {
+        switch (position) {
+            case 1:
+                Intent accountIntent = new Intent(this, AccountActivity.class);
+                startActivity(accountIntent);
+                break;
+            case 2:
+                Intent sendPromoIntent = new Intent(this, SendPromoActivity.class);
+                startActivity(sendPromoIntent);
+                break;
+        }
+    }
+
+    public void callRetrofit2() {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -106,26 +127,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
-    public class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-        }
+    public void setGraph() {
+        graphView = findViewById(R.id.graph);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1,3),
+                new DataPoint(2, 3)
+        });
+        graphView.addSeries(series);
     }
 
-    private void selectItem(int position) {
-        switch (position) {
-            case 1:
-                Intent accountIntent = new Intent(this, AccountActivity.class);
-                startActivity(accountIntent);
-                break;
-            case 2:
-                Intent sendPromoIntent = new Intent(this, SendPromoActivity.class);
-                startActivity(sendPromoIntent);
-                break;
-        }
-    }
 }
