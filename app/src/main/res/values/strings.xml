@@ -8,4 +8,6 @@
         <item>Аккаунт</item>
         <item>Получить промокод</item>
     </string-array>
+    <string name="account">Account</string>
+    <string name="get_promo">Promo</string>
 </resources>

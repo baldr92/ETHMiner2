@@ -3,6 +3,7 @@ package com.example.fire.ethminer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private String titles[];
     private ListView drawerList;
     private RetrofitInterfaceGraph service;
+    Toast toast;
 
     @BindView(R.id.new_data)
     TextView textData;
@@ -65,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
+        callRetrofit2();
+        setGraph();
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,13 +78,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        callRetrofit2();
-
-
-
     }
 
-    public class DrawerItemClickListener implements ListView.OnItemClickListener {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+   /* public class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectItem(position);
@@ -101,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+    */
+
 
     public void callRetrofit2() {
         Gson gson = new GsonBuilder()
@@ -124,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Request> call, Throwable t) {
-
+            toast.show();
             }
         });
     }
@@ -132,9 +138,10 @@ public class MainActivity extends AppCompatActivity {
     public void setGraph() {
         graphView = findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
+               /* new DataPoint(0, 1),
                 new DataPoint(1,3),
                 new DataPoint(2, 3)
+                */
         });
         graphView.addSeries(series);
     }
