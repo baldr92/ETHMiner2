@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -36,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton imageButton;
     boolean flag = true;
     GraphView graphView;
-    private String titles[];
-    private ListView drawerList;
+
     private RetrofitInterfaceGraph service;
     Toast toast;
 
@@ -80,13 +80,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-   /* public class DrawerItemClickListener implements ListView.OnItemClickListener {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.account_view:
+                Intent intent = new Intent(this, AccountActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.get_promo:
+                Intent intent1 = new Intent(this, SendPromoActivity.class);
+                startActivity(intent1);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+   /*
+    public class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectItem(position);
@@ -138,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
     public void setGraph() {
         graphView = findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-               /* new DataPoint(0, 1),
+             /* new DataPoint(0, 1),
                 new DataPoint(1,3),
                 new DataPoint(2, 3)
                 */

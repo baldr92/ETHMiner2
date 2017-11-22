@@ -10,4 +10,7 @@
     </string-array>
     <string name="account">Account</string>
     <string name="get_promo">Promo</string>
+    <string name="sharePromo">Делитесь промокодом с друзьями и увеличивайте скорость майнинга с каждой активацией
+    приложения. Приложение активированное с Вашим промокодом получит на свой стартовый баланс 0.0035 ETH</string>
+    <string name="your_promo_text">Ваш промокод: </string>
 </resources>
