@@ -13,4 +13,8 @@
     <string name="sharePromo">Делитесь промокодом с друзьями и увеличивайте скорость майнинга с каждой активацией
     приложения. Приложение активированное с Вашим промокодом получит на свой стартовый баланс 0.0035 ETH</string>
     <string name="your_promo_text">Ваш промокод: </string>
+    <string name="button_text">Отправить промокод</string>
+    <string name="quantity_text">Активированных приложений: </string>
+    <string name="coefficient_speed">Коэффициент скорости: </string>
+    <string name="your_address_text">Ваш адрес ETH</string>
 </resources>

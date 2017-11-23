@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,25 +22,54 @@
         android:id="@+id/send_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="sendPromoOnClick"/>
+        android:onClick="sendPromoOnClick"
+        android:text="@string/button_text"
+        android:layout_below="@+id/promo_text"/>
 
     <TextView
         android:id="@+id/your_promo_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/your_promo_text"/>
+        android:text="@string/your_promo_text"
+        android:layout_below="@id/send_button"/>
 
     <TextView
         android:id="@+id/promo_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:paddingLeft="50dp"
+        android:layout_toRightOf="@id/your_promo_text"
+        android:layout_below="@id/send_button"
+        android:text="11111111111"/>
 
     <TextView
-        android:id="@+id/quatity"
+        android:id="@+id/quantity_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:text="@string/quantity_text"
+        android:layout_below="@id/your_promo_text"/>
+
+    <TextView
+        android:id="@+id/quantity_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="50dp"
+        android:layout_toRightOf="@id/quantity_text"
+        android:layout_below="@id/your_promo_text"
+        android:text="0" />
+    <TextView
+        android:id="@+id/coefficient_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/quantity_text"
+        android:text="@string/coefficient_speed"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/quantity_text"
+        android:paddingLeft="50dp"
+        android:layout_toRightOf="@id/coefficient_speed"
+        android:text="1.0"/>
 
 
-</LinearLayout>
+</RelativeLayout>
